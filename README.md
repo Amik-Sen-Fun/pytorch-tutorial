@@ -315,9 +315,47 @@ t = t.cuda() # shifts to GPU
   ```
 > The product of shape of a tensor must always be equal to the number of elements
 
+### Tensor Operations and Gradients
+
+- Some of the examples of arithematic operations are
+```python
+x = torch.tensor(3.)
+w = torch.tensor(4., require_grad = True) 
+# 'require_grad' parameter is used to mark quantities  we need gradients of
+b = torch.tensor(5., require_grad = True)
+
+y = w*x+b
+print(y) # prints 17
+
+# To compute Derivate
+y.backward()
+
+# Now derivatives are calculated
+
+# To get there values do:
+print(x.grad, w.grad, b.grad)
+>>> None tensor(3.) tensor(4.)
+
+# x.grad = None because require_grad = False by default hence it is not calculated 
+```
+
+- To convert tensor to numpy and converting back
+```python
+x = np.array([1,2])
+y = torch.from_numpy(x) # same memory location 
+y = torch.tensor(x)     # creates a copy
+z = y.numpy()           # Convert back to numpy
+```
+
+### Linear Regression using PyTorch
+
+- The NoteBook can be found in the Repo, with code and details
+
 ### Study of tensor in a CNN
 - Usally the images that are passed through a CNN are a rank 4 tensor in which
 the first element is the batch size (B), the second is the number of colour channels (C), the third is the height (H), and last is the width (W). With these information we can generally pin point any pixel of an image.
 - Hence, image = [B,C,H,W]  
 - After processing through a CNN the dimensions are bound to change. **The number of channels = Number of convulation fiters Used** in each layer, these new channels are known as **Feature Maps** because they highlight a particular feature of the picture.
+
+
 
