@@ -1,4 +1,4 @@
-# pytorch-tutorial
+# PyTorch Tutorial
 Learning stuff for B.Tech Project
 
 To write high quality codes let's learn Object Oriented Programming in Python first
@@ -249,5 +249,20 @@ se = A()
 se.salary = 6000
 print(se.salary) # prints 6000 
 ```
+
+## PyTorch Basics
+PyTorch is a deep learning framework and a scientifi computing package. It is used to handle tensor and move process off and on GPU easily. Main PyTorch packages:
+
+|Package Name|Description|
+|----|----|
+|torch| the top level pyTorch Package|
+|torch.nn| It is the nn module containing layers, weights and forward function|
+|torch.autograd| A subpackage used to handle the derivative calculations|
+|torch.nn.functional| This gives access tp loss functions, activation functions and convolution operations|
+|torch.optim| Gives access to functions like optimizers like SGD and Adam|
+|torch.utils| Contains packages to make data loading and pre-processing easy|
+|torchvision| Gives access to models, image transformations and datasets for computer vision|
+
+ 
 
 
