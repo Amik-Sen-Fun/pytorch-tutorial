@@ -85,6 +85,7 @@ print(d)
         return self.age == other.age and self.kind == other.kind
         # This condition will be used to see whether two instances are equal or not
 ``` 
+### Decorators and Other Methods
 Now, if there is a function which doesnot has self as a parameter then it can only be called as a class method. Example:
 ```python
 # Class code above
@@ -94,3 +95,159 @@ Now, if there is a function which doesnot has self as a parameter then it can on
 print(d.hey())             # Will give error
 print(Dogs.hey('Tommy'))   # Will print "Hey Tommy"
 ```
+To make it accessible to users we define a decorator as:
+```python
+# Class code above
+    @staticmethod
+    def hey(name):
+        return f"Hey!! {name}"
+
+print(d.hey('Tommy'))      # Will print "Hey Tommy"
+print(Dogs.hey('Tommy'))   # Will print "Hey Tommy"
+```
+### Decorators in Python
+- A Decorator is a function that takes another function as an argument and extends the functinality of the parent function without changing it. This could be rawly implemented as : 
+
+```python
+def seDecorator(func):
+    def wrapper():
+        print('Start')
+        func()
+        print('End')
+    return wrapper
+
+def PrintName():
+    print('Amik')
+
+PrintName = seDecorator(PrintName)
+PrintName()
+
+# Start
+# Amik
+# End
+```
+- This same thing can be implemented using Decorator: 
+```python
+def seDecorator(func):
+    def wrapper():
+        print('Start')
+        func()
+        print('End')
+    return wrapper
+
+@seDecorator
+def PrintName():
+    print('Amik')
+
+# Start
+# Amik
+# End
+```
+- Now, a problem is that we might not know the exact number of arguments of the functions so for that we use *args* and *kwargs*
+
+```python
+def seDecorator(func):
+    def wrapper(*args, **kwargs):
+        print('Start')
+        result = func(*args, **kwargs)
+        print('End')
+        return result
+    return wrapper
+
+@seDecorator
+def PrintName():
+    print('Amik')
+
+# Start
+# Amik
+# End
+```
+### Inheritence
+- A method by which a class can take on the attributes and methods of another class. The derived class is called 'child class' and the other class is known as 'parent class'. In this way the parent class is extended and methods can be overrided. 
+```python
+class Employee:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age  = age 
+
+class SoftwareEngineer(Employee):
+    pass
+
+class Designer(Employee):
+    pass
+
+se = SoftwareEngineer()
+# Here this will give an error as SoftwareEngineer has inherited the __init__ for Software
+
+se = SoftwareEngineer('Amik','22')
+# This works fine now
+```
+- Now, there could be an init function in the child class as well, this is handled as :
+```python
+class Employee:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age  = age
+
+class SoftwareEngineer(Employee):
+    # super() is used to access function of parent class
+    def __init__(self, name, age, level):
+        super().__init__(name,age)
+        self.level = level
+
+class Designer(Employee):
+    pass
+
+se = SoftwareEngineer()
+# Here this will give an error as SoftwareEngineer has inherited the __init__ for Software
+
+se = SoftwareEngineer('Amik','22', 'Senior')
+# This works fine now
+```
+### Polymorphism 
+-  Helps us to define functions with same name and use them in situations accordingly, the child function gets used and the parent class function is overridden.
+
+### Encapsulation:
+- Encapsulation is the process or method to contain the information.
+- Encapsulation, problems are solved at the implementation level.
+- Encapsulation is a method to hide the data in a single entity or unit along with a method to protect information from outside. 
+-  Encapsulation can be implemented using by access modifier i.e. private, protected and public.
+  - \_ (single underscore)   : means protected  (accessible)
+  - Nothing                  : means public
+  - \_\_ (double underscore) : means private (cannot be accessed at all) 
+    - Getter and Setter functions are created to access and modify data
+- In encapsulation, the data is hidden using methods of getters and setters.
+
+### Abstraction
+- Data Abstraction is the property by virtue of which only the essential details are displayed to the user. The trivial or the non-essentials units are not displayed to the user. Ex: A car is viewed as a car rather than its individual components.
+- We can implement abstraction using abstract class and interfaces.
+
+### Properties
+- There are some ways to set the getters and setters using decoratives:
+```python
+class A:
+    def __init__(self):
+        self._salary = None
+    
+    @property
+    def salary(self):
+        return self._salary
+    
+    @salary.setter
+    def salary(self, value):
+        return self._salary = value
+	
+    # used to delete the value after use
+    @salary.deleter
+    def salary(self):
+        del self._salary
+
+# After defining like that
+se = A()
+se.salary = 6000
+print(se.salary) # prints 6000 
+```
+
+
