@@ -263,6 +263,61 @@ PyTorch is a deep learning framework and a scientifi computing package. It is us
 |torch.utils| Contains packages to make data loading and pre-processing easy|
 |torchvision| Gives access to models, image transformations and datasets for computer vision|
 
- 
+- PyTorch also use python debugger, so debugging is easy and is preferred in reasearch, because the computational graphs needed for the derivative calculations are built dynamically with the operations. 
 
+- To check pytorch and it's version and GPU availability do:
+```python
+# To print the torch version
+print(torch.__version__) # 
+torch.cuda.is_avaiable() # Returns True if GPU is present
+torch.version.cuda       # Returns cuda version
+``` 
+
+### CUDAs GPU and Need of GPU
+- GPUs are faster in doing parallel computation than CPU's, as they have more cores
+- In Neural Networks, the tasks are _embarrassingly parallel_ (where little to no efforts is required to make computation parallel). Ex: Imagine convulation
+- To use CUDA in pytorch we simply do:
+```python
+t = torch.tensor([1,2,3])
+t = t.cuda() # shifts to GPU
+```
+- Small works should be done on CPU because sometimes loading something on GPU takes more time than the processing and it slows us down
+
+### Tensor Basics
+- It is basically an n dimensional array, an nd-Tensor means we need n values to access a pariular member of the tensor
+- **Rank** : The rank of a tensor is the number of dimensions present within the tensor or the number of axis, of the tensor.
+- **Axes** : The length of an axis tells us the specific dimension of the tensor. Example, ay there is a tensor defined as 
+  ```python
+  dd = [
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+  ]
+  
+  # Each element of axis 1 is an array
+  dd[0]
+  dd[1]
+  dd[2]
+
+  # Each element of axis 2 is a number
+  dd[0][0]
+  dd[1][0]
+  ```
+- **Shape** : Determines the length of each axis in a tensor. The Rank of a tensor can be define as the length of the shape 
+  ```python
+  t = torch.tensor(dd) # from last example
+  t.shape  # gives the shape of the tensor
+  type(t)  # shows 'torch.Tensor'
+  ```
+- Shapes and Re-shaping are important, and to reshape use:
+  ```python
+  t.reshape(1,9) # t is from previous example
+  ```
+> The product of shape of a tensor must always be equal to the number of elements
+
+### Study of tensor in a CNN
+- Usally the images that are passed through a CNN are a rank 4 tensor in which
+the first element is the batch size (B), the second is the number of colour channels (C), the third is the height (H), and last is the width (W). With these information we can generally pin point any pixel of an image.
+- Hence, image = [B,C,H,W]  
+- After processing through a CNN the dimensions are bound to change. **The number of channels = Number of convulation fiters Used** in each layer, these new channels are known as **Feature Maps** because they highlight a particular feature of the picture.
 
