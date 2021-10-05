@@ -352,11 +352,14 @@ z = y.numpy()           # Convert back to numpy
 the first element is the batch size (B), the second is the number of colour channels (C), the third is the height (H), and last is the width (W). With these information we can generally pin point any pixel of an image.
 - Hence, image = [B,C,H,W]  
 - After processing through a CNN the dimensions are bound to change. **The number of channels = Number of convulation fiters Used** in each layer, these new channels are known as **Feature Maps** because they highlight a particular feature of the picture.
+> Continue from vid 8
 
 ### Tutorial Notebooks in Sequence:
 For implementation basic details refer the notebooks in the given sequence
 - Linear Regression in Pytorch - optimizers and basic commandes
+- Feed Forward Neural Network
 - Working With Images and Logistics Regression in PyTorch - How to handle images
 - Residual Networks, Data Augmentation and Regularization
 - Training Generative Adverserial Networks (GANs)
 
+> Continue from 3:14
